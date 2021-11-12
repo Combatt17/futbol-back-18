@@ -1,0 +1,21 @@
+{
+    "_id": {
+        "$oid": "618db8e120ef2e631024802a"
+    },
+    "fecha": "11/11/2021",
+    "goleslocal": 0,
+    "golesvisitante": 0,
+    "local": {
+        "_id": {
+            "$oid": "618dac4e04999b74b9fdd213"
+        },
+        "nombre": "Medellín"
+    },
+    "visitante": {
+        "_id": {
+            "$oid": "618dacb104999b74b9fdd214"
+        },
+        "nombre": "Millonarios"
+    },
+    "_class": "com.partidoback18.partidos.models.PartidoModel"
+}
