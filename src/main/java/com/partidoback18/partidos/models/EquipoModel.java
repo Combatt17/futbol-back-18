@@ -3,13 +3,17 @@ package com.partidoback18.partidos.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+//Agregamos el nombre a la colección 
 @Document(collection="equipos")
 public class EquipoModel {
     
-    @Id
+    @Id //Etiqueta que asígna este campo como id
     private String id;
-    private String nombre;
 
+    
+    private String nombre; //Campo que guarda el nombre del equipo
+
+    //Metodos selectores (get) y modificadores (set)
     public String getId() {
         return id;
     }
