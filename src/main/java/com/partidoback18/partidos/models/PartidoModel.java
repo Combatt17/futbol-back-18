@@ -12,7 +12,14 @@ public class PartidoModel {
     private int golesvisitante;
     private EquipoModel local;
     private EquipoModel visitante;
-    
+    private UsuarioModel usuario;
+
+    public UsuarioModel getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
+    }
     public String getId() {
         return id;
     }
