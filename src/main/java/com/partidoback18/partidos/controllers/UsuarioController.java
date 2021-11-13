@@ -5,12 +5,15 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.partidoback18.partidos.exceptions.CustomException;
 import com.partidoback18.partidos.models.UsuarioModel;
 import com.partidoback18.partidos.services.UsuarioService;
 import com.partidoback18.partidos.utils.BCrypt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +28,12 @@ public class UsuarioController {
 
     //Definimos el método para agregar un usuario
     @PostMapping("/usuarios")
-    public ResponseEntity<Map<String, String>> guardar(@Valid @RequestBody UsuarioModel usuario){
+    public ResponseEntity<Map<String, String>> guardar(@Valid @RequestBody UsuarioModel usuario, Errors error){
+       //Verificamos si existe un error
+       if(error.hasErrors()){
+        throwError(error);
+    }
+       
         Map<String, String> respuesta= new HashMap<>();
 
         //Ciframos la contraseña con la clase BCrypt
@@ -41,6 +49,19 @@ public class UsuarioController {
         }
 
         return ResponseEntity.ok(respuesta);
+    }
+
+     //Método para el manejo de errores
+     public void throwError(Errors error){
+        String mensaje="";
+        int index=0;
+        for(ObjectError e: error.getAllErrors()){
+            if(index>0){
+                mensaje +=" | ";
+            }
+            mensaje+=String.format("Parametro: %s - Mensaje: %s", e.getObjectName(),e.getDefaultMessage());
+        }
+        throw new CustomException(mensaje);
     }
     
 }
