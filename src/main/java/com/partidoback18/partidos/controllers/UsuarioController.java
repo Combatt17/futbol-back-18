@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import com.partidoback18.partidos.models.UsuarioModel;
 import com.partidoback18.partidos.services.UsuarioService;
+import com.partidoback18.partidos.utils.BCrypt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +28,10 @@ public class UsuarioController {
     public ResponseEntity<Map<String, String>> guardar(@Valid @RequestBody UsuarioModel usuario){
         Map<String, String> respuesta= new HashMap<>();
 
-        UsuarioModel u=this.usuarioService.buscarUsername(usuario.getUsername());
+        //Ciframos la contraseña con la clase BCrypt
+        usuario.setPassword(BCrypt.hashpw(usuario.getPassword(), BCrypt.gensalt()));
 
+        UsuarioModel u=this.usuarioService.buscarUsername(usuario.getUsername());
         if(u.getId()==null){
             this.usuarioService.guardarUsuario(usuario);
             respuesta.put("mensaje","Se agregó correctamente el usuario");
