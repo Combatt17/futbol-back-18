@@ -12,6 +12,7 @@ public class UsuarioModel {
     private String correo;
     private String username;
     private String password;
+    // ROL
 
     //Este campo me va a guardar el token de acceso de manera temporal
     private String hash;

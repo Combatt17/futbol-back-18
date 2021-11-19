@@ -13,4 +13,6 @@ public interface UsuarioRepository extends MongoRepository<UsuarioModel,String>{
     //Para buscar a un usuario por nombre de usuario (username)
     public Optional<UsuarioModel> findByUsername(String username);
 
+    
+
 }
