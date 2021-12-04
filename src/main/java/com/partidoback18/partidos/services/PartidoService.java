@@ -16,11 +16,12 @@ public class PartidoService {
 
     public void guardarPartido(PartidoModel partido){
         this.partidoRepository.save(partido);
-
     }
 
     public List<PartidoModel> traerTodos(){
         return this.partidoRepository.findAll();
     }
+
+    
     
 }

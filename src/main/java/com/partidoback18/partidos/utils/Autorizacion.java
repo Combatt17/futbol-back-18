@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
@@ -26,6 +27,11 @@ public class Autorizacion implements Filter {
             throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
+       
+        HttpServletResponse resp = (HttpServletResponse) response;
+        resp.setHeader("Access-Control-Allow-Origin", "*");
+        resp.setHeader("Access-Control-Allow-Headers", "Authorization");
+        resp.setHeader("Access-Control-Allow-Methods", "GET, POST");
 
         String url = req.getRequestURI();
         // http://localhost:8080 ------->url
@@ -49,6 +55,8 @@ public class Autorizacion implements Filter {
                 response.setContentType("application/json");
                 String body="{\"autorizacion\":\"TOKEN NO VALIDO\"}";
                 response.getWriter().write(body);
+            }catch(Exception e){
+                System.out.println(e.getMessage());
             }
 
 
