@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,17 @@ public class UsuarioController {
 
     @Autowired
     UsuarioService usuarioService;
+
+    /**
+     * Método para verificar si el token se encuentra activo
+     */
+    @GetMapping("/verificar") //Definimos el path para hacer la petición
+    public ResponseEntity<Map<String, Boolean>> validarToken() {
+        Map<String, Boolean> respuesta= new HashMap<>();
+        respuesta.put("ok",true);
+        return ResponseEntity.ok(respuesta);
+    }
+
 
     // Definimos el método para agregar un usuario
     @PostMapping("/usuarios")

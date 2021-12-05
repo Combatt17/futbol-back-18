@@ -30,7 +30,7 @@ public class Autorizacion implements Filter {
        
         HttpServletResponse resp = (HttpServletResponse) response;
         resp.setHeader("Access-Control-Allow-Origin", "*");
-        resp.setHeader("Access-Control-Allow-Headers", "Authorization");
+        resp.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
         resp.setHeader("Access-Control-Allow-Methods", "GET, POST");
 
         String url = req.getRequestURI();
@@ -47,7 +47,7 @@ public class Autorizacion implements Filter {
             }try{
                 //Lectura de carga util del JWT
                 Jws<Claims> claims = Jwts.parser().setSigningKey(KEY).parseClaimsJws(hash);
-                if((url.contains("/api/partidos") || url.contains("/api/equipos"))&& (!claims.getBody().get("username").equals(""))){
+                if((url.contains("/api/verificar") ||url.contains("/api/partidos") || url.contains("/api/equipos"))&& (!claims.getBody().get("username").equals(""))){
                     chain.doFilter(request, response);
                 }
 
